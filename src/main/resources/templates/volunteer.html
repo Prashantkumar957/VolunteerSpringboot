@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Alumni</title> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Alumni Platform</a> <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/alumni">Alumni List</a> </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/alumni/add">Add Alumni</a> </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h2 class="mb-0" th:text="${alumni.id == 0 ? 'Add New Alumni' : 'Edit Alumni: ' + alumni.name}"></h2> </div>
+            <div class="card-body">
+                <form th:action="@{/alumni/save}" th:object="${alumni}" method="post"> <div class="mb-3">
+                        <input type="hidden" class="form-control" id="id" th:field="*{id}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name:</label>
+                        <input type="text" class="form-control" id="name" th:field="*{name}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="batch" class="form-label">Batch:</label> <input type="number" class="form-control" id="batch" th:field="*{batch}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="company" class="form-label">Company:</label> <input type="text" class="form-control" id="company" th:field="*{company}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="contact" class="form-label">Contact:</label> <input type="text" class="form-control" id="contact" th:field="*{contact}" required>
+                    </div>
+
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary me-2">
+                            <i class="bi bi-save"></i> Save Alumni </button>
+                        <a href="/alumni" class="btn btn-secondary"> <i class="bi bi-x-circle"></i> Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</body>
+</html>

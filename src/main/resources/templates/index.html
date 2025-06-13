@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Alumni List</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Alumni Platform</a> <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/alumni">Alumni List</a> </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/alumni/add">Add Alumni</a> </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+
+        <div th:if="${message}" th:classappend="${'alert-' + messageType}" class="alert alert-dismissible fade show" role="alert">
+            <span th:text="${message}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h2 class="mb-0">All Alumni</h2> </div>
+            <div class="card-body">
+                <div class="mb-3 d-flex justify-content-between align-items-center">
+                    <h3 class="mb-0">Current Alumni</h3> <a th:href="@{/alumni/add}" class="btn btn-success">
+                        <i class="bi bi-plus-circle"></i> Add New Alumni </a>
+                </div>
+
+                <table class="table table-bordered table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Batch</th>      <th>Company</th>    <th>Contact</th>    <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="alumni : ${alumniList}"> <td th:text="${alumni.id}"></td>
+                            <td th:text="${alumni.name}"></td>
+                            <td th:text="${alumni.batch}"></td>      <td th:text="${alumni.company}"></td>    <td th:text="${alumni.contact}"></td>    <td>
+                                <a th:href="@{/alumni/update/{id}(id=${alumni.id})}" class="btn btn-info btn-sm">
+                                    <i class="bi bi-pencil"></i> Update
+                                </a>
+                                <a th:href="@{/alumni/delete/{id}(id=${alumni.id})}" class="btn btn-danger btn-sm ms-2"
+                                   onclick="return confirm('Are you sure you want to delete this alumni record?');"> <i class="bi bi-trash"></i> Delete
+                                </a>
+                            </td>
+                        </tr>
+                        <tr th:if="${alumniList.empty}">
+                            <td colspan="6" class="text-center text-muted">No alumni found.</td> </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Information Demo</title>
+</head>
+<body>
+    <h1>Alumni Information System</h1>
+    <h2 th:text="${alumni.name}">Name</h2>
+    <h2 th:text="${alumni.batch}">Batch</h2>      <h2 th:text="${alumni.company}">Company</h2>    <h2 th:text="${alumni.contact}">Contact</h2>    <div th:object="${alumni}">
+		<h1>Alumni Information System Section Expression</h1>
+		<h2 th:text="*{name}">Name</h2>
+		<h2 th:text="*{batch}">Batch</h2>
+		<h2 th:text="*{company}">Company</h2>
+		<h2 th:text="*{contact}">Contact</h2>
+	</div>
+</body>
+</html>
